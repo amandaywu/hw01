@@ -22,7 +22,7 @@ window.builtins = {};
 builtins.trim = function(str) {
   let newStr = "";
   for (let i = 0; i < str.length; i++) {
-    if (str[i] !== " ") {
+    if (str[i] !== " "|[(str[i-1] !== " ") & (str[i+1] !== " ")]) {
       newStr += str[i];
     }
   }
@@ -45,12 +45,26 @@ builtins.trim = function(str) {
 // ex. builtins.search('Horizons', 'h') -> false
 
 builtins.search = function(sourceString, searchString) {
-  if (searchString.indexOf(sourceString)) {
-    return true;
-  } else {
+  if(searchString.length > sourceString.length){
     return false;
   }
+  if (sourceString.indexOf(searchString) < 0) {
+    return false;
+  }
+  return true;
 };
+  // for (let i = 0; i < searchString.length; i++) { 
+  //   if (!searchString[i].indexOf(sourceString)) {
+  //     return false;
+  //   }
+  //   else{
+  //     if (!searchString.indexOf(sourceString)){
+  //       return false;
+  //     }
+  // //   }
+  // }
+  // return true;
+
 
 // ----------------------------------------------------------------------------
 
@@ -65,6 +79,9 @@ builtins.search = function(sourceString, searchString) {
 // ex. builtins.reverse([123]) -> [123]
 
 builtins.reverse = function(arr) {
-  let next = arr.unshift();
-  return builtins.reverse(arr).concat(next);
+    // let next = arr.unshift();
+    // .concat(next)
+  // var new_arr =builtins.reverse(arr);
+  var new_arr =arr.reverse();
+  return new_arr;
 };
